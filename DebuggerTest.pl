@@ -101,7 +101,7 @@ describe "A Debugger" => sub {
 
 	 		# Create some time delay since test script is too fast;
 	 		sleep 2;
-	 		
+
 	 		$debug->timestamp();
 	 		open my $filehandle, '<', $file or die "Could not open `$file` for reading:\n$!";
 

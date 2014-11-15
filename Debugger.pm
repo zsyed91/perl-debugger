@@ -1,3 +1,13 @@
+###
+# A pure perl debugger class to inspect objects, variables, and provide stacktraces 
+#   along with timing scripts, methods, etc
+# Check https://github.com/zsyed91/perl-debugger/ for the latest updates.
+#
+# Author:       Zshawn Syed
+# Version:      1.0.0
+# Licence:      Perl-Debugger is licenced under MIT licence (http://opensource.org/licenses/MIT)
+### 
+
 package Debugger;
 use strict;
 
