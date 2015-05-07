@@ -76,3 +76,14 @@ Will output the contents of `@lines` to the log file.
 
 		$debug->stacktrace(); # <- Provide how we got here via stacktrace;
 	}
+
+
+#### Output a counter
+
+    my $debug = new Debugger();
+    
+    while ($meets_criteria) {
+    	$debug->counter();
+
+    	$meets_criteria = check_criteria();
+    }
