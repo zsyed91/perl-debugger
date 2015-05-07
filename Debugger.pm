@@ -88,6 +88,19 @@ sub timestamp {
 	$self->log("Script took $final_time seconds.");
 }
 
+# Run an increment counter to determine how many times a line of code is run
+sub counter {
+	my $self = shift;
+
+	unless ($self->{'_counter'}) {
+		$self->{'_counter'} = 0;
+	}
+
+	$self->{'_counter'}++;
+
+	$self->_print($self->{'_counter'});
+}
+
 sub _print_header {
 	my $self = shift;
 
