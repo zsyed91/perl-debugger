@@ -99,17 +99,37 @@ describe "A Debugger" => sub {
             ok($stack >= 5);
         };
 
-        it "should provide a timestamp of script time" => sub {
+        it "should provide a timestamp of script time in seconds if > 1s" => sub {
 
-            # Create some time delay since test script is too fast;
-            sleep 2;
+            # Create some time delay to ensure greater than one second time elapses
+            sleep 1;
 
             $debug->timestamp();
             open my $filehandle, '<', $file or die "Could not open `$file` for reading:\n$!";
 
             my $timestamp = 0;
             while (<$filehandle>) {
-                if ($_ =~ /^Script took [\d]+ seconds.\s+$/) {
+                if ($_ =~ /^Script took \d+\.\d+ seconds.\s+$/) {
+                    $timestamp = 1;
+                    last;
+                }
+            }
+
+            close $filehandle;
+
+            ok($timestamp == 1);
+
+        };
+
+        it "should provide a timestamp of script time in milliseconds if < 1s" => sub {
+
+            my $debug = Debugger->new();
+            $debug->timestamp();
+            open my $filehandle, '<', $file or die "Could not open `$file` for reading:\n$!";
+
+            my $timestamp = 0;
+            while (<$filehandle>) {
+                if ($_ =~ /^Script took \d+\.\d+ milliseconds.\s+$/) {
                     $timestamp = 1;
                     last;
                 }

@@ -11,6 +11,8 @@
 package Debugger;
 use strict;
 
+use Time::HiRes qw/time/;
+
 use Data::Dumper;
 
 
@@ -84,8 +86,15 @@ sub timestamp {
 	my $self = shift;
 
 	my $final_time = time() - $self->{'start_time'};
+	my $time_unit = 'seconds';
 
-	$self->log("Script took $final_time seconds.");
+	if ($final_time < 1) {
+		$final_time = $final_time * 100;
+		$time_unit = 'milliseconds';
+
+	}
+
+	$self->log("Script took $final_time $time_unit.");
 }
 
 # Run an increment counter to determine how many times a line of code is run
@@ -129,9 +138,6 @@ sub _print {
 
 	print $filehandle $message, "\n";
 }
-
-
-
 
 
 1;
